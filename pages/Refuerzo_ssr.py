@@ -8,6 +8,7 @@ import ezdxf
 import io
 import shutil
 from io import BytesIO
+from io import StringIO
 
 def crear_tabla_ssr(Datos, Nombre, coordenadas_dxf):
     Numeracion    = []
@@ -161,9 +162,13 @@ if st.button("Procesar"):
             except:
                 Nombre.append('P'+atributos['00'])
     for file in path1: 
-        Datos                = pd.read_csv(file, sep="\\t", engine='python')
+        #Datos                = pd.read_csv(file, sep="\\t", engine='python')
+        bytes_data  = file.getvalue()
+        string_data = StringIO(bytes_data.decode("utf-16"))
+        #Datos           = pd.read_csv(st.session_state['uploaded_file'], sep="\\t", engine='python')
+        Datos            = pd.read_csv(string_data, sep="\\t", engine='python')
         #Datos                = pd.read_csv(file,sep='\\t'.encode('utf-16-le'), encoding='utf-16-le', engine='python')
-        #Datos                 = pd.read_csv(BytesIO(file.read().decode('UTF-16').encode('UTF-8')), sep='\t', header=0)
+        #Datos                 = pd.read_csv(BytesIO(file.read().decode('UTF-16').encode('UTF-s8')), sep='\t', header=0)
         
         Datos['Coordenadas'] = Datos['Location (feet)'].apply(lambda X: [(float(val2.split(',')[0].replace('(','').replace(')','')),float(val2.split(',')[1].replace('(','').replace(')','')))  for val2 in X.split(')(')])
         tabla                = crear_tabla_ssr(Datos, Nombre, coordenadas_dxf)
