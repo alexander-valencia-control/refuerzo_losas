@@ -26,3 +26,5 @@ st.markdown("Los datos de entrada para generar la tabla de refuerzo a cortante s
 
 st.image("Screenshot 2024-08-20 104657.jpg", caption="Tablas para refuerzo ssr")
 st.image("Screenshot 2024-08-20 104807.jpg", caption="Plano dxf")
+
+st.write("Elaborado por: Alexander Valencia - correo:lavalenciah12@gmail.com")
