@@ -17,10 +17,19 @@ msp = doc.modelspace()
 
 
 if st.button("Procesar"):
-    Datos           = pd.read_csv(st.session_state['uploaded_file'], sep="\\t", engine='python')
+    bytes_data  = path1.getvalue()
+    string_data = StringIO(bytes_data.decode("utf-16"))
+    #data = pd.read_csv(string_data)
+
+    bytes_data2  = path2.getvalue()
+    string_data2 = StringIO(bytes_data.decode("utf-16"))
+    
+    #Datos           = pd.read_csv(st.session_state['uploaded_file'], sep="\\t", engine='python')
+    Datos           = pd.read_csv(string_data, sep="\\t", engine='python')
     Datos['Inicio'] = Datos['Location (feet)'].apply(lambda X: [(float(val2.split(',')[0].replace('(','').replace(')',''))*12,float(val2.split(',')[1].replace('(','').replace(')',''))*12)  for val2 in X.split(')(')])
 
-    Datos2          = pd.read_csv(st.session_state['uploaded_file2'], sep="\\t", engine='python')
+    #Datos2          = pd.read_csv(st.session_state['uploaded_file2'], sep="\\t", engine='python')
+    Datos2          = pd.read_csv(string_data2, sep="\\t", engine='python')
     Datos2['Inicio'] = Datos2['Location (feet)'].apply(lambda X: [(float(val2.split(',')[0].replace('(','').replace(')',''))*12,float(val2.split(',')[1].replace('(','').replace(')',''))*12)  for val2 in X.split(')(')])
 
     ## DETALLADO REFUERZO VERTICAL 
