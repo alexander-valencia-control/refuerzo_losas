@@ -6,6 +6,7 @@ import itertools
 import random 
 import ezdxf
 import io
+from io import StringIO
 
 st.title('Refuerzo longitudinal losas') 
 
